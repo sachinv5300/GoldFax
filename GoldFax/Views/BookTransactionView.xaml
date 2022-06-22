@@ -15,7 +15,7 @@
                        GlowBrush="RoyalBlue"
                        BorderBrush="RoyalBlue"
                        Height="600"
-                       Width="600">
+                       Width="650">
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
             <StackPanel Orientation="Horizontal"
@@ -164,7 +164,7 @@
                          Grid.Row="1"
                          Grid.Column="4"
                          Grid.ColumnSpan="2"
-                         Width="200"
+                         Width="230"
                          TabIndex="2"
                          IsReadOnly="True"
                          Text="{Binding BookName,UpdateSourceTrigger=PropertyChanged}">
