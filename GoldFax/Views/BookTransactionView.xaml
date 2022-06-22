@@ -35,7 +35,7 @@
 
                 </StackPanel.Resources>
                 <materialDesign:PackIcon Name="HeadIcon"
-                                         Kind="Book"></materialDesign:PackIcon>
+                                         Kind="BookOpen"></materialDesign:PackIcon>
                 <TextBlock Name="HeadName">Book Transactions</TextBlock>
             </StackPanel>
         </controls:WindowCommands>
