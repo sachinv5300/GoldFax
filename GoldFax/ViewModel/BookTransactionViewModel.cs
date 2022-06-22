@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using GoldFax.DAL;
 using GoldFax.Model;
+using GoldFax.Repository;
 
 namespace GoldFax.ViewModel
 {
     internal class BookTransactionViewModel : ViewModelBase
     {
+        #region Properties
+
         private int _id;
         /// <summary>
         /// Transaction ID
@@ -91,21 +94,16 @@ namespace GoldFax.ViewModel
             {
                 _booktransselectedItem = value;
                 OnPropertyChanged(nameof(BooktransSelectedItem));
-                if (BooktransSelectedItem != null)
-                {
-                    Id = BooktransSelectedItem.ID;
-                    BookName = BooktransSelectedItem.BookName;
-                    BorrowedDate = BooktransSelectedItem.BorrowedDate;
-                    DeliveredDate = BooktransSelectedItem.DeliveredDate;
-                }
+                getSelectedRow();
             }
         }
+        #endregion
 
         public BookTransactionViewModel()
         {
             getAllTrasaction();
         }
-
+        #region Functions
         /// <summary>
         /// Method get All details
         /// </summary>  
@@ -114,5 +112,34 @@ namespace GoldFax.ViewModel
             DataBaseFunction objdbfun = new DataBaseFunction();
             BooktransDatasource = objdbfun.GetBTCollection();
         }
+
+        /// <summary>
+        /// Method get Show record in controls
+        /// </summary>  
+        void getSelectedRow()
+        {
+            try
+            {
+                if (BooktransSelectedItem != null)
+                {
+                    Id = BooktransSelectedItem.ID;
+                    BookName = BooktransSelectedItem.BookName;
+                    BorrowedDate = BooktransSelectedItem.BorrowedDate;
+                    DeliveredDate = BooktransSelectedItem.DeliveredDate;
+                }
+                else
+                {
+                    Id = 0;
+                    BookName = String.Empty;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                GoldLog.LoggingException("GetBTCollection", "BookTransactionViewModel", ex);
+
+            }
+        }
+        #endregion
     }
 }
