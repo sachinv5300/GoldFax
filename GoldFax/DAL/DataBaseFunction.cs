@@ -2,6 +2,7 @@
 using GoldFax.Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,9 @@ namespace GoldFax.DAL
 {
     internal class DataBaseFunction
     {
-        public IEnumerable<BookTransaction> GetBTCollection()
+        public ObservableCollection<BookTransaction> GetBTCollection()
         {
-            IEnumerable<BookTransaction> DataSource = null;
+            ObservableCollection<BookTransaction> DataSource = new ObservableCollection<BookTransaction>();
             try
             {
                 GoldDB objGoldDB = GoldDB.GetobjGoldDB;
@@ -21,13 +22,24 @@ namespace GoldFax.DAL
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    DataSource = dt.AsEnumerable().Select(data => new BookTransaction()
+                    //DataSource = dt.AsEnumerable().Select(data => new BookTransaction()
+                    //{
+                    //    ID = Convert.ToInt32(data["ID"]),
+                    //    BookName = data["BookName"].ToString(),
+                    //    BorrowedDate = Convert.ToDateTime(data["BorrowedDate"]).ToShortDateString(),
+                    //    DeliveredDate = Convert.ToDateTime(data["DeliveredDate"]).ToShortDateString()
+                    //});
+                    foreach (DataRow dtrow in dt.Rows)
                     {
-                        ID = Convert.ToInt32(data["ID"]),
-                        BookName = data["BookName"].ToString(),
-                        BorrowedDate = Convert.ToDateTime(data["BorrowedDate"]).ToShortDateString(),
-                        DeliveredDate = Convert.ToDateTime(data["DeliveredDate"]).ToShortDateString()
-                    });
+                        BookTransaction bt = new BookTransaction()
+                        {
+                            ID = Convert.ToInt32(dtrow["ID"]),
+                            BookName = dtrow["BookName"].ToString(),
+                            BorrowedDate = Convert.ToDateTime(dtrow["BorrowedDate"]).ToShortDateString(),
+                            DeliveredDate = Convert.ToDateTime(dtrow["DeliveredDate"]).ToShortDateString()
+                        };
+                        DataSource.Add(bt);
+                    }
 
                 }
             }

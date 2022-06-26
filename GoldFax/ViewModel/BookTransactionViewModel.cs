@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,11 +70,11 @@ namespace GoldFax.ViewModel
             }
         }
 
-        private IEnumerable<BookTransaction> _booktransdatasource;
+        private ObservableCollection<BookTransaction> _booktransdatasource;
         /// <summary>
         /// All Trasaction Collection 
         /// </summary>
-        public IEnumerable<BookTransaction> BooktransDatasource
+        public ObservableCollection<BookTransaction> BooktransDatasource
         {
             get { return _booktransdatasource; }
             set

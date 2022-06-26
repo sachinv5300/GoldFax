@@ -80,7 +80,8 @@
                   BorderThickness="1"
                   BorderBrush="Gray"
                   SelectionUnit="FullRow"
-                  Foreground="Black">
+                  Foreground="Black"
+                  AllowDrop="True">
 
             <DataGrid.Columns>
 
